@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style>
+			body {
+				background-color: #ffffff;
+				margin: 0;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script src="http://threejsplaygnd.brangerbriz.net/js/three.min.js"></script>
+		<script src="http://threejsplaygnd.brangerbriz.net/js/Detector.js"></script>
+		<script>
+
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+			
+			var camera, scene, renderer;
+			var geometry, material, mesh;
+
+			function setup() {
+
+				var W = window.innerWidth, H = window.innerHeight;
+renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true } );
+				renderer.autoClearColor = false;
+				renderer.setSize( W * 0.5, H * 0.5 );
+				document.body.appendChild( renderer.domElement );
+
+				camera = new THREE.PerspectiveCamera( 50, W/H, 1, 10000 );
+				camera.position.z = 700;
+
+				scene = new THREE.Scene();
+				
+				
+				// paste your code from the geometryGUI here
+				for ( var i = 0; i < 300; i ++ ) {				map = THREE.ImageUtils.loadTexture('../texturez/water.jpg');
+				geometry = new THREE.TorusKnotGeometry(110, 30, 55, 10, 15, 3, 1);
+				material = new THREE.MeshBasicMaterial({shading: THREE.FlatShading, color: 0xdcdcdc, map: map});
+				mesh = new THREE.Mesh(geometry, material);
+						
+				
+						  
+				map.wrapS = map.wrapT = THREE.RepeatWrapping;
+				map.repeat.set( 1, 1 );
+												  
+				scene.add(mesh);
+
+				bg = document.body.style;
+				bg.background = '#75c5ca';
+					// your mesh code (from the geometry GUI) goes here
+				}
+			
+				bg = document.body.style;
+				bg.background = '#75c5ca';
+
+
+
+			}
+
+			function draw() {
+
+				requestAnimationFrame( draw );
+				
+				// experiment with code from the snippets menu here
+		
+				camera.position.z = Math.sin( Date.now() * 0.001 ) * 500;
+				camera.position.y = Math.sin( Date.now() * 0.001 ) * 300;
+				camera.lookAt(mesh.position);
+		
+
+				renderer.render( scene, camera );
+
+			}
+
+			setup();
+			draw();
+
+		</script>
+		
+	</body>
+</html>
