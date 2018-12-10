@@ -81,3 +81,8 @@ p {
 footer { 
     display: block;
 } 
+
+video {
+	width 50%;
+	align-items: center;
+}
